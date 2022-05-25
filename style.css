@@ -138,3 +138,11 @@ button {
   margin-top: 1rem;
   align-self: flex-start;
 }
+
+#character{
+  position : absolute; 
+  transform: scale(0.9) translate(0%, 30%);
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom;
+}

@@ -159,3 +159,27 @@ checkbox.addEventListener("click", () => {
     tl2.to(".checkbox-label", { color: "#C5c5c5" }, "<");
   }
 });
+
+/* Animation des yeux du personnage et du bras. */
+/* Au standard les yeux se ferment du bas vers le haut alors on doit set un transform au center pour que l'animation
+se produise au centre et que les yeux se ferment d'en haut et d'en bas. */
+
+gsap.set("#eye", { transformOrigin: "center" });
+
+gsap.fromTo(
+  "#eye",
+  { scaleY: 1 },
+  {
+    scaleY: 0.3,
+    repeat: -1,
+    yoyo: true,
+    repeatDelay: 0.5,
+    ease: "Power2.easeOut",
+  }
+);
+
+gsap.fromTo(
+  "#eyebrow",
+  { y: 0 },
+  { y: -1, repeat: -1, yoyo: true, repeatDelay: 0.5, ease: "Power2.easeOut" }
+);
