@@ -158,3 +158,24 @@ button {
   transform: translate(-50%, -50%);
   opacity: 0;
 }
+
+@media screen and (max-width: 812px) {
+  form{
+    width : 90vw; 
+    min-height: 80vh;
+    flex-direction: column;
+    padding : 8rem 3rem;
+  }
+
+  #character {
+      position : absolute; 
+      transform: scale(0.4) translate(0%, 30%);
+      bottom: 0;
+      left: 0;
+      transform-origin: bottom;
+  }
+.line-svg {
+  width: 100%;
+}
+
+}
