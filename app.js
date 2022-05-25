@@ -103,7 +103,7 @@ form.addEventListener("click", () => {
 // Ici les deux fonction qui vont check l'email.
 // on a un regex qui permet de checker que les caractère rentré dans l'input correspondent bien à un email et tel.
 //pour ça je peux aller chercher les éléments sur le regex generator ou chercher une fonction qui check email et number
-
+//Les fonctions ici return true quand l'input est correct;
 function validateEmail(email) {
   let re = /\S+@\S+\.\S+/;
   return re.test(email);
@@ -119,3 +119,43 @@ function colorize(color, line, placeholder) {
   gsap.to(line, { stroke: color, duration: 0.75 });
   gsap.to(placeholder, { stroke: color, duration: 0.75 });
 }
+
+//Checkbox animation fill
+
+const checkbox = document.querySelector(".checkbox");
+const tl2 = gsap.timeline({
+  defaults: { duration: 0.5, ease: "Power2.easeOut" },
+});
+const tickMarkPath = document.querySelector(".tick-mark path");
+const pathLength = tickMarkPath.getTotalLength();
+
+/* Ici le gsap.set permet de donner des propriété standard à notre checkbox
+On en a besoin parce que notre checkbox les propriété standard sont les propriété finales de notre animation
+et on aimerais qu'elle ai les propriété initiale de notre animation.
+*/
+gsap.set(tickMarkPath, {
+  strokeDashoffset: pathLength,
+  strokeDasharray: pathLength,
+});
+
+checkbox.addEventListener("click", () => {
+  if (checkbox.checked) {
+    tl2.to(".checkbox-fill", { top: "0%" });
+    tl2.fromTo(
+      tickMarkPath,
+      { strokeDashoffset: pathLength },
+      { strokeDashoffset: 0 },
+      "<50%"
+    );
+    tl2.to(".checkbox-label", { color: "#6391E8" }, "<");
+  } else {
+    tl2.to(".checkbox-fill", { top: "100%" });
+    tl2.fromTo(
+      tickMarkPath,
+      { strokeDashoffset: 0 },
+      { strokeDashoffset: pathLength },
+      "<50%"
+    );
+    tl2.to(".checkbox-label", { color: "#C5c5c5" }, "<");
+  }
+});
