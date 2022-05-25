@@ -48,6 +48,7 @@ form {
   outline: none;
   color: #777474;
   font-size: 0.7rem;
+  outline : none;
 }
 
 .input-container {
@@ -67,6 +68,8 @@ form {
   position: absolute;
   left : 0;
   bottom: 0;
+  overflow: visible;
+  opacity: 0.8;
 }
 
 .checkbox-label {
