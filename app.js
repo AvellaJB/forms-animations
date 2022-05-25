@@ -23,6 +23,7 @@ containers.forEach((container) => {
   const input = container.querySelector(".input");
   const line = container.querySelector(".elastic-line");
   const placeholder = container.querySelector(".placeholder");
+
   input.addEventListener("focus", () => {
     if (!input.value) {
       tl.fromTo(
@@ -44,6 +45,36 @@ containers.forEach((container) => {
         "<15%"
       );
     }
+    // Name validation.
+    input.addEventListener("input", (e) => {
+      if (e.target.type === "text") {
+        let inputText = e.target.value;
+        if (inputText.length > 2) {
+          //Ajoute de couleur.
+          colorize("#6391E8", line, placeholder);
+        } else {
+          colorize("#FE8C99", line, placeholder);
+        }
+      }
+      if (e.target.type === "email") {
+        let valid = validateEmail(e.target.value);
+        if (valid) {
+          //Ajoute de couleur.
+          colorize("#6391E8", line, placeholder);
+        } else {
+          colorize("#FE8C99", line, placeholder);
+        }
+      }
+      if (e.target.type === "tel") {
+        let valid = validatePhone(e.target.value);
+        if (valid) {
+          //Ajoute de couleur.
+          colorize("#6391E8", line, placeholder);
+        } else {
+          colorize("#FE8C99", line, placeholder);
+        }
+      }
+    });
   });
 });
 
@@ -68,3 +99,23 @@ form.addEventListener("click", () => {
     }
   });
 });
+
+// Ici les deux fonction qui vont check l'email.
+// on a un regex qui permet de checker que les caractère rentré dans l'input correspondent bien à un email et tel.
+//pour ça je peux aller chercher les éléments sur le regex generator ou chercher une fonction qui check email et number
+
+function validateEmail(email) {
+  let re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+function validatePhone(phone) {
+  let re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  return re.test(phone);
+}
+
+//Fonction d'ajout de couleur :
+
+function colorize(color, line, placeholder) {
+  gsap.to(line, { stroke: color, duration: 0.75 });
+  gsap.to(placeholder, { stroke: color, duration: 0.75 });
+}
